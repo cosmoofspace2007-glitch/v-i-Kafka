@@ -1,0 +1,27 @@
+@Service
+public class OrderService {
+
+    @Autowired
+    private OrderRepository repository;
+
+    @Autowired
+    private OrderProducer producer;
+
+    public Order createOrder(Order order){
+
+        Order saved = repository.save(order);
+
+        OrderCreatedEvent event = new OrderCreatedEvent();
+
+        event.setOrderId(saved.getId());
+        event.setCustomer(saved.getCustomer());
+        event.setProduct(saved.getProduct());
+        event.setQuantity(saved.getQuantity());
+
+        producer.publish(event);
+
+        return saved;
+
+    }
+
+}
