@@ -1,0 +1,13 @@
+@Service
+public class OrderProducer {
+
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
+    public void publish(OrderCreatedEvent event){
+
+        kafkaTemplate.send("order-events", event);
+
+    }
+
+}
