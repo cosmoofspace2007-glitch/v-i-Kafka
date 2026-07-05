@@ -1,0 +1,17 @@
+@Service
+public class InventoryConsumer {
+
+    @KafkaListener(
+            topics = "order-events",
+            groupId = "inventory-group")
+    public void receive(OrderCreatedEvent event){
+
+        System.out.println("========== INVENTORY SERVICE ==========");
+
+        System.out.println("Trừ kho sản phẩm:");
+
+        System.out.println(event.getProduct());
+
+    }
+
+}
