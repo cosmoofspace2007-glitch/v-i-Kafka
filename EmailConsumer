@@ -1,0 +1,16 @@
+@Service
+public class EmailConsumer {
+
+    @KafkaListener(
+            topics = "order-events",
+            groupId = "email-group")
+    public void receive(OrderCreatedEvent event){
+
+        System.out.println("========== EMAIL SERVICE ==========");
+        System.out.println("Gửi email xác nhận cho khách:");
+
+        System.out.println(event.getCustomer());
+
+    }
+
+}
