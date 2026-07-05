@@ -1,0 +1,13 @@
+@Configuration
+public class KafkaConfig {
+
+    @Bean
+    public NewTopic orderTopic() {
+
+        return TopicBuilder
+                .name("order-events")
+                .build();
+
+    }
+
+}
